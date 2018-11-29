@@ -16,9 +16,11 @@ import numpy as np
 number_of_faces = 2
 number_of_closed_hands = 3
 number_of_opened_hands = 3
-cropped_image = 0
-distance_to_see_hand = 180
-# open cv calssifires
+distance_to_see_hand = 160
+# cropped_image = 0
+
+
+# open cv classifiers
 face_cascade = cv2.CascadeClassifier('/home/omar/Desktop/robot_arm_hand_face_tracking/lbpcascade_frontalface.xml')
 open_hand = cv2.CascadeClassifier('//home/omar/Desktop/robot_arm_hand_face_tracking/open_palm.xml')
 closed_hand = cv2.CascadeClassifier('/home/omar/Desktop/robot_arm_hand_face_tracking/fist_classifire.xml')
@@ -34,9 +36,9 @@ while True:
         #  convert image to gray and get face dimension in image
         gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-        faces = face_cascade.detectMultiScale(gray_img)
-        hands_open = open_hand.detectMultiScale(gray_img)
-        hands_closed = closed_hand.detectMultiScale(gray_img)
+        faces = face_cascade.detectMultiScale(gray_img, 1.3, 5)
+        hands_open = open_hand.detectMultiScale(gray_img, 1.7, 3)
+        hands_closed = closed_hand.detectMultiScale(gray_img, 1.7, 3)
         # print(faces, hands_closed, hands_open)
 
         # vertical line
@@ -44,8 +46,8 @@ while True:
         # horizontal line
         cv2.line(image, pt1=(10, 250), pt2=(500, 250), color=(0, 0, 0), thickness=2)
         # screen center
-        cv2.putText(image, '+', (300, 250), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
-                    thickness=8)
+        # cv2.putText(image, '+', (300, 250), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
+        #             thickness=8)
 
         # make sure there is faces in the image
         if faces != ():
@@ -81,7 +83,6 @@ while True:
 
                             for x2, y2, w2, h2 in hands_closed:
                                 # print(hands_closed)
-                                print(x2)
 
                                 ptc_1 = (x2, y2)
                                 ptc_2 = (x2 + w2, y2 + h2)
@@ -154,4 +155,5 @@ while True:
     else:
         print("the returned image is not correct ")
 
-cv2.destroyAllWindows()
+cap.release()
+cv2.destroyAllWindows() 
