@@ -1,0 +1,147 @@
+int value = 0;
+int delay_time = 500;
+
+// the pin that will communicate with abdallah's micro 
+int upp = 2;
+int downp = 3 ;
+int leftp  = 4;
+int rightp = 5;
+int gripper_openp = 8 ;
+int gripper_offp = 9 ;
+
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode (upp , OUTPUT);
+  pinMode (downp, OUTPUT);
+  pinMode (leftp , OUTPUT);
+  pinMode (rightp, OUTPUT);
+  pinMode (gripper_openp, OUTPUT);
+  pinMode (gripper_offp, OUTPUT);
+
+}
+
+void loop()
+{
+  while (Serial.available())
+  {
+    value = Serial.read();
+  }
+
+  if (value == '1') {
+    up();
+    delay(delay_time);
+
+  }
+
+  else if (value == '2') {
+    down();
+
+    delay(delay_time);
+
+  }
+
+  else if (value == '3') {
+    right();
+
+    delay(delay_time);
+
+  }
+  else if (value == '4') {
+    left();
+    delay(delay_time);
+
+  }
+  else if (value == '8') {
+    gripper_o ();
+    delay(delay_time);
+
+
+  }
+  else if (value == '9') {
+    gripper_c();
+
+    delay(delay_time);
+
+  }
+  else {
+    off();
+  }
+
+}
+
+
+// functions of movement 
+void up() {
+  digitalWrite  (upp, HIGH) ;
+  digitalWrite  (downp, LOW) ;
+  digitalWrite  (leftp, LOW) ;
+  digitalWrite  (rightp, LOW) ;
+  digitalWrite  (gripper_openp, LOW) ;
+  digitalWrite  (gripper_offp, LOW) ;
+
+}
+
+
+void down () {
+  digitalWrite  (upp, LOW) ;
+  digitalWrite  (downp, HIGH) ;
+  digitalWrite  (leftp, LOW) ;
+  digitalWrite  (rightp, LOW) ;
+  digitalWrite  (gripper_openp, LOW) ;
+  digitalWrite  (gripper_offp, LOW) ;
+
+}
+
+void right () {
+  digitalWrite  (upp, LOW) ;
+  digitalWrite  (downp, LOW) ;
+  digitalWrite  (leftp, LOW) ;
+  digitalWrite  (rightp, HIGH) ;
+  digitalWrite  (gripper_openp, LOW) ;
+  digitalWrite  (gripper_offp, LOW) ;
+
+}
+
+void left () {
+  digitalWrite  (upp, LOW) ;
+  digitalWrite  (downp, LOW) ;
+  digitalWrite  (leftp, HIGH) ;
+  digitalWrite  (rightp, LOW) ;
+  digitalWrite  (gripper_openp, LOW) ;
+  digitalWrite  (gripper_offp, LOW) ;
+
+}
+
+void gripper_o() {
+  digitalWrite  (upp, LOW) ;
+  digitalWrite  (downp, LOW) ;
+  digitalWrite  (leftp, LOW) ;
+  digitalWrite  (rightp, LOW) ;
+  digitalWrite  (gripper_openp, HIGH) ;
+  digitalWrite  (gripper_offp, LOW) ;
+
+}
+
+void gripper_c () {
+  digitalWrite  (upp, LOW) ;
+  digitalWrite  (downp, LOW) ;
+  digitalWrite  (leftp, LOW) ;
+  digitalWrite  (rightp, LOW) ;
+  digitalWrite  (gripper_openp, LOW) ;
+  digitalWrite  (gripper_offp, HIGH) ;
+
+}
+
+void off (){
+  digitalWrite  (upp, LOW) ;
+  digitalWrite  (downp, LOW) ;
+  digitalWrite  (leftp, LOW) ;
+  digitalWrite  (rightp, LOW) ;
+  digitalWrite  (gripper_openp, LOW) ;
+  digitalWrite  (gripper_offp, LOW) ;
+
+}
+
+
