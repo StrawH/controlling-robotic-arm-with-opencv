@@ -21,9 +21,9 @@ distance_to_see_hand = 160
 
 
 # open cv classifiers
-face_cascade = cv2.CascadeClassifier('/home/omar/Desktop/robot_arm_hand_face_tracking/lbpcascade_frontalface.xml')
-open_hand = cv2.CascadeClassifier('//home/omar/Desktop/robot_arm_hand_face_tracking/open_palm.xml')
-closed_hand = cv2.CascadeClassifier('/home/omar/Desktop/robot_arm_hand_face_tracking/fist_classifire.xml')
+face_cascade = cv2.CascadeClassifier('classifier_path')
+open_hand = cv2.CascadeClassifier('classifier_path')
+closed_hand = cv2.CascadeClassifier('classifier_path')
 
 # plug the camera
 cap = cv2.VideoCapture(0)
